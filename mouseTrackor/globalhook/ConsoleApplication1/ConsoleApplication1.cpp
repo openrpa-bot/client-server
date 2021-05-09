@@ -16,10 +16,10 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
         if (wParam == WM_LBUTTONDOWN)
         {
             printf("clicked");
-        }
-        GetWindowInformation getWindowInformation;
-        getWindowInformation.windowAtPoint(pMouseStruct->pt);
         
+            GetWindowInformation getWindowInformation;
+            getWindowInformation.windowAtPoint(pMouseStruct->pt);
+        }
     }
     return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
 }
