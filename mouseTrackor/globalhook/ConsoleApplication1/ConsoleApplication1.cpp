@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 HHOOK hMouseHook;
+HHOOK hKeyboardHook;
 
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -19,6 +20,14 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
     }
     return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
 }
+LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+{
+    KBDLLHOOKSTRUCT* pKeyboardStruct = (KBDLLHOOKSTRUCT*)lParam;
+    if (pKeyboardStruct != NULL) {
+        printf("Keystroke vCode = %c  Keystroke scancode = %c\n", pKeyboardStruct->vkCode, pKeyboardStruct->scanCode);
+    }
+    return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+}
 
 DWORD WINAPI MyMouseLogger(LPVOID lpParm)
 {
@@ -26,6 +35,7 @@ DWORD WINAPI MyMouseLogger(LPVOID lpParm)
 
     // here I put WH_MOUSE instead of WH_MOUSE_LL
     hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, mouseProc, hInstance, NULL);
+    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardProc, hInstance, NULL);
 
     MSG message;
     while (GetMessage(&message, NULL, 0, 0)) {
@@ -33,6 +43,7 @@ DWORD WINAPI MyMouseLogger(LPVOID lpParm)
         DispatchMessage(&message);
     }
 
+    UnhookWindowsHookEx(hKeyboardHook);
     UnhookWindowsHookEx(hMouseHook);
     return 0;
 }
