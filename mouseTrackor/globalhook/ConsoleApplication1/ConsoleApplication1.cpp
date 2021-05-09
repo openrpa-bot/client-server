@@ -27,7 +27,7 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
     KBDLLHOOKSTRUCT* pKeyboardStruct = (KBDLLHOOKSTRUCT*)lParam;
     if (pKeyboardStruct != NULL) {
-        printf("Keystroke vCode = %c  Keystroke scancode = %c\n", pKeyboardStruct->vkCode, pKeyboardStruct->scanCode);
+        printf("Keystroke vCode = %c(%d)  Keystroke scancode = %c\n", pKeyboardStruct->vkCode, pKeyboardStruct->vkCode, pKeyboardStruct->scanCode);
     }
     GetWindowInformation getWindowInformation;
     getWindowInformation.windowAtFocus();
