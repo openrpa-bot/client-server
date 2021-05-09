@@ -4,6 +4,7 @@
 //#include <iostream>
 #include <windows.h>
 #include <stdio.h>
+#include "GetWindowInformation.h"
 
 HHOOK hMouseHook;
 HHOOK hKeyboardHook;
@@ -16,7 +17,9 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
         {
             printf("clicked");
         }
-        printf("Mouse position X = %d  Mouse Position Y = %d\n", pMouseStruct->pt.x, pMouseStruct->pt.y);
+        GetWindowInformation getWindowInformation;
+        getWindowInformation.windowAtPoint(pMouseStruct->pt);
+        
     }
     return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
 }
@@ -26,6 +29,8 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
     if (pKeyboardStruct != NULL) {
         printf("Keystroke vCode = %c  Keystroke scancode = %c\n", pKeyboardStruct->vkCode, pKeyboardStruct->scanCode);
     }
+    GetWindowInformation getWindowInformation;
+    getWindowInformation.windowAtFocus();
     return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
 }
 
