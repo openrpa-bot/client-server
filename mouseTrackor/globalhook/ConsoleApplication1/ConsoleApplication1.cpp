@@ -5,6 +5,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include "GetWindowInformation.h"
+#include "UIAutomation.h"
+
 
 HHOOK hMouseHook;
 HHOOK hKeyboardHook;
@@ -15,8 +17,11 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
     if (pMouseStruct != NULL) {
         if (wParam == WM_LBUTTONDOWN)
         {
-            printf("clicked");
+            printf("----------------------------clicked--------------------------------------\n");
         
+            UIAutomation* uIAutomation = new UIAutomation();
+            uIAutomation->windowAtPoint(pMouseStruct->pt);
+            delete uIAutomation;
             GetWindowInformation getWindowInformation;
             getWindowInformation.windowAtPoint(pMouseStruct->pt);
         }
@@ -40,7 +45,7 @@ DWORD WINAPI MyMouseLogger(LPVOID lpParm)
 
     // here I put WH_MOUSE instead of WH_MOUSE_LL
     hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, mouseProc, hInstance, NULL);
-    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardProc, hInstance, NULL);
+    //hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardProc, hInstance, NULL);
 
     MSG message;
     while (GetMessage(&message, NULL, 0, 0)) {

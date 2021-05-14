@@ -1,6 +1,11 @@
 #include "GetWindowInformation.h"
 #include <stdio.h>
 
+#include <iostream>     // std::wcout, std::endl
+#include <stdlib.h>     // EXIT_FAILURE, EXIT_SUCCESS
+#include <string>       // std::wstring
+using namespace std;
+
 void GetWindowInformation::windowAtPoint(POINT P)
 {
 	HWND Handle;
@@ -8,7 +13,12 @@ void GetWindowInformation::windowAtPoint(POINT P)
 	Handle = WindowFromPoint(P);
     Handle = GetAncestor(Handle, GA_ROOT);
 
-	printf("Mouse position X = %d  Mouse Position Y = %d , Handle = %10x\n", P.x, P.y, Handle);
+    int const   bufferSize = 1 + GetWindowTextLength(Handle);
+    wstring     title(bufferSize, L'\0');
+    int const   nChars = GetWindowText(Handle, &title[0], bufferSize);
+
+	printf("Mouse position X = %d  Mouse Position Y = %d , Handle = %10x", P.x, P.y, Handle);
+    wcout << ", name: '" << title << "'" << endl;
 }
 
 void GetWindowInformation::windowAtFocus()

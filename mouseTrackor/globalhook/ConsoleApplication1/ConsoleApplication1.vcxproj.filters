@@ -21,9 +21,15 @@
     <ClCompile Include="GetWindowInformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIAutomation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GetWindowInformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIAutomation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
