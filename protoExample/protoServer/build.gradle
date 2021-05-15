@@ -1,4 +1,6 @@
 plugins {
+    id 'org.springframework.boot' version '2.4.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
@@ -10,14 +12,23 @@ repositories {
 }
 
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.14.0'
     compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.14.0'
 
-    compile 'com.google.protobuf:protobuf-gradle-plugin:0.8.14'
+    //compile 'com.google.protobuf:protobuf-gradle-plugin:0.8.14'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
+//bootRun {
+//    jvmArgs = ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=4200,suspend=n','-Dspring.profiles.active=dev']
+//}
 
+//run {
+//    jvmArgs = ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=4200,suspend=n','-Dspring.profiles.active=dev']
+//}
 test {
     useJUnitPlatform()
 }
