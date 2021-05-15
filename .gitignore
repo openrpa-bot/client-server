@@ -26,4 +26,7 @@ Debug/
 .vs/
 .gradle/
 .idea/
+build/
 globalhook.VC.db
+*.vcxproj.user
+*.vcxproj.filters
