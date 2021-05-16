@@ -144,9 +144,11 @@
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="protoclasses\service.pb.cc" />
+    <ClCompile Include="protoseriolised.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="protoclasses\service.pb.h" />
+    <ClInclude Include="protoseriolised.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

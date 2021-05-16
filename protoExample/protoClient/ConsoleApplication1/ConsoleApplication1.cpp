@@ -7,6 +7,7 @@
 
 #include <curl.h>
 #include ".\protoclasses\service.pb.h"
+#include "protoseriolised.h"
 
 
 static size_t my_write(void* buffer, size_t size, size_t nmemb, void* param)
@@ -36,6 +37,7 @@ int main()
 		}
 	}
 	curl_global_cleanup();
-	std::cout << "\n\n" << result << "\n\n";
+	protoseriolised::deseriolised(result);
+	//std::cout << "\n\n" << result << "\n\n";
 }
 
