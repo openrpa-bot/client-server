@@ -1,0 +1,9 @@
+download https://curl.se/download/curl-7.76.1.zip from https://curl.se/download.html
+unzip the downloaded
+open "x86 Native Tools Command Prompt for VS 2019" and "x64 Native Tools Command Prompt for VS 2019"
+cd ......\curl-7.76.1\winbuild
+set RTLIBCFG=static  
+nmake /f Makefile.vc mode=static vc=16 debug=yes 
+nmake /f Makefile.vc mode=static vc=16 debug=no
+
+build is available in .......\curl-7.76.1\builds
