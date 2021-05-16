@@ -5,8 +5,9 @@
 #include <iostream>
 #include <string>
 
-#include ".\CurlInclude\curl.h"
+#include <curl.h>
 #include ".\protoclasses\service.pb.h"
+
 
 static size_t my_write(void* buffer, size_t size, size_t nmemb, void* param)
 {
@@ -24,7 +25,7 @@ int main()
 	curl_global_init(CURL_GLOBAL_DEFAULT);
 	curl = curl_easy_init();
 	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, "https://tcno.co/hello.txt");
+		curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8338");
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, my_write);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &result);
 		curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
@@ -35,6 +36,6 @@ int main()
 		}
 	}
 	curl_global_cleanup();
-	std::cout << result << "\n\n";
+	std::cout << "\n\n" << result << "\n\n";
 }
 
