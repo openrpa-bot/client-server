@@ -18,3 +18,25 @@ void protoseriolised::deseriolised(std::string result) {
 	std::cout << "\n\n" << "deseriolised result: " << responce.result() << "\n\n";
 	google::protobuf::ShutdownProtobufLibrary();
 }
+
+std::string protoseriolised::seriolised(algorithm::Request request) {
+	return request.SerializeAsString();
+}
+
+std::string protoseriolised::seriolised(int a, int b) {
+	algorithm::Request request;
+	request.set_a(a);
+	request.set_a(b);
+	return request.SerializeAsString(); 
+
+}
+bool protoseriolised::seriolised(int a, int b, void **data, int &size ) {
+	algorithm::Request request, request1;
+	request.set_a(a);
+	request.set_b(b);
+	size = request.ByteSizeLong()* sizeof(long);
+	*data = new long[size]();	
+	request.SerializeToArray(*data, size);
+	request1.ParseFromArray(*data, size);
+	return true;
+	}
