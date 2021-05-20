@@ -30,7 +30,7 @@ std::string protoseriolised::seriolised(int a, int b) {
 	return request.SerializeAsString(); 
 
 }
-bool protoseriolised::seriolised(int a, int b, void **data, int &size ) {
+std::string protoseriolised::seriolised(int a, int b, void **data, int &size ) {
 	algorithm::Request request, request1;
 	request.set_a(a);
 	request.set_b(b);
@@ -38,5 +38,11 @@ bool protoseriolised::seriolised(int a, int b, void **data, int &size ) {
 	*data = new long[size]();	
 	request.SerializeToArray(*data, size);
 	request1.ParseFromArray(*data, size);
-	return true;
+	return request.SerializeAsString();;
 	}
+std::string protoseriolised::seriolisedAsString(int a, int b) {
+	algorithm::Request request, request1;
+	request.set_a(a);
+	request.set_b(b);
+	return request.SerializeAsString();
+}

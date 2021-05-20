@@ -23,7 +23,7 @@ public class ProtoService {
         }catch(InvalidProtocolBufferException ex){
 
         }
-        return Response.newBuilder().setResult(request.getA()+request.getB()+1).build();
+        return Response.newBuilder().setResult(request.getA()+request.getB()).build();
     }
 
     @RequestMapping("AdditionRequest") //http://localhost:8338/AdditionRequest?request=
